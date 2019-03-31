@@ -29,11 +29,11 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "DATABASE_URL=postgres://localhost:5432/ranking_users & nodemon server.js",
+    "start": "DATABASE_URL=postgres://localhost:5432/ranking_users & node server.js",
     "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --mode=development --watch",
-    "start:dev": "npm run webpack:dev & DATABASE_URL=postgres://localhost:5432/ranking_users & nodemon server.js --ignore dist/"
+    "start:dev": "npm run webpack:dev & DATABASE_URL=postgres://localhost:5432/ranking_users & node server.js --ignore dist/"
   },
   "keywords": [],
   "author": "",
