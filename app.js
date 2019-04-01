@@ -19,7 +19,7 @@ router.get('/api/users/:id', (req, res, next)=>{
 })
 
 router.post('/api/users', (req, res, next)=>{
-    console.log(req.body)
+    console.log('req.body in router post', req.body)
     return User.create(req.body)
     .then(user => res.json(user))
     .catch(next)

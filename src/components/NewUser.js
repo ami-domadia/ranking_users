@@ -51,7 +51,7 @@ class NewUser extends Component {
         <div>
         <label htmlFor='rank'>Rank [1-100]</label>
         <input className="form-control"
-          name='rank' type='text' 
+          name='rank' type='number' min="0" max="100" 
           value={this.state.rank}
           onChange={this.onHandleChange}
         />
@@ -70,4 +70,4 @@ const mapDispatchToProps =  (dispatch) => {
     }
 }
 
-export default connect(mapDispatchToProps)(NewUser);
+export default connect(null, mapDispatchToProps)(NewUser);

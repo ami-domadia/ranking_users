@@ -30,7 +30,9 @@ const fetchUsers = () => async (dispatch) => {
 }
 
 const createUser = (user) => (dispatch) => {
+    console.log('in store', user);
     axios.post(`/api/users`, user)
+    .then((response)=>console.log(response.data))
     .then(()=>axios.get('/api/users'))
     .then((response)=>{const action = gotUsersFromServer(response.data); return action;})
     .then((action)=>dispatch(action))
@@ -39,6 +41,14 @@ const createUser = (user) => (dispatch) => {
 
 const deleteUser = (id) => (dispatch) => {
     axios.delete(`/api/users/${id}`)
+    .then(()=>axios.get('/api/users'))
+    .then((response)=>{const action = gotUsersFromServer(response.data); return action;})
+    .then((action)=>dispatch(action))
+    .catch((err)=>console.log(err))
+}
+
+const editUser = (id, user) => (dispatch) => {
+    axios.put(`/api/users/${id}`, user)
     .then(()=>axios.get('/api/users'))
     .then((response)=>{const action = gotUsersFromServer(response.data); return action;})
     .then((action)=>dispatch(action))
@@ -55,6 +65,7 @@ function reducer(state=initialState, action){
 export {
     fetchUsers,
     deleteUser,
+    editUser,
     createUser,
     gotUsersFromServer
 }

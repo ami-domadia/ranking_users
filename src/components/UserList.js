@@ -7,7 +7,7 @@ const UserList = (props) => {
         return (
             <div>
                 <ul className="list-group" >
-                { users.map(user => <User user={user} key={user.id} deleteUser={props.deleteUser} />) }
+                { users.map(user => <User user={user} key={user.id} editUser={props.editUser} deleteUser={props.deleteUser} />) }
                 </ul>
             </div>
         );
