@@ -1,27 +1,47 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { createUser } from '../store';
+import { createUser, editUser } from '../store';
 
 
-class NewUser extends Component {
+class UserForm extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      name: '',
-      bio: '',
-      rank: 100
-    }
     
+    if(this.props.user){
+      this.type='edit';
+      console.log(this.props.location);
+      this.state = {
+        id: this.props.user.id,
+        name: this.props.user.name,
+        bio: this.props.user.bio,
+        rank: this.props.user.rank
+      }
+    }
+    else{
+      this.type = 'create';
+      this.state = {
+        id: 0,
+        name: '',
+        bio: '',
+        rank: 100
+      }
+  } 
     this.onHandleSubmit=this.onHandleSubmit.bind(this);
     this.onHandleChange=this.onHandleChange.bind(this);
   }
 
   onHandleSubmit(event){
     event.preventDefault();
-    console.log(this.state);
-    this.props.createNewUser({name: this.state.name, bio: this.state.bio, 
+    if(this.type==='create'){
+      this.props.createNewUser({name: this.state.name, bio: this.state.bio, 
         rank: this.state.rank});
+    }
+    else{
+      this.props.editUser(this.state.id, {name: this.state.name, bio: this.state.bio, 
+        rank: this.state.rank});
+    }
+   
   }
 
   onHandleChange(event){
@@ -66,8 +86,9 @@ class NewUser extends Component {
 
 const mapDispatchToProps =  (dispatch) => {
     return {
-         createNewUser: (user) => dispatch(createUser(user))
+         createNewUser: (user) => dispatch(createUser(user)),
+         editUser: (id, user) => dispatch(editUser(id, user))
     }
 }
 
-export default connect(null, mapDispatchToProps)(NewUser);
+export default connect(null, mapDispatchToProps)(UserForm);

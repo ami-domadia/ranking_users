@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import { fetchUsers, deleteUser, editUser } from '../store';
 import Nav from './Nav';
 import UserList from './UserList';
-import NewUser from './NewUser';
+import UserForm from './UserForm';
 import { Home } from './Home';
 
 class Main extends Component {
@@ -35,7 +35,8 @@ class Main extends Component {
                                     Nav({location, count: this.props.users.length, toplist: toplist}))}/>
             <Route exact path='/users' render={(()=>UserList({users: this.props.users, editUser:this.props.editUser, deleteUser:this.props.deleteUser}))} />
             <Route path='/users/topRanked' render={(()=>UserList({users: toplist, editUser:this.props.editUser, deleteUser:this.props.deleteUser}))} />
-            <Route path='/users/create' component={NewUser}/>
+            <Route path='/users/create' component={UserForm}/>
+            {/* <Route path='/users/edit' render={({location})=>UserForm({location})}/> */}
             <Route exact path='/' render={()=>Home({count: this.props.users.length})} />
     
         </main>
