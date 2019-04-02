@@ -3,6 +3,10 @@ const router = express.Router()
 
 const {User} = require('./db.js')
 
+router.get('/', (req, res, next)=>{
+    res.send(express.static(path.join(__dirname,'dist')))
+})
+
 router.get('/api/users/', (req, res, next)=>{
     return User.findAll({order: [['rank', 'ASC']]})
     .then((users)=>res.json(users))
